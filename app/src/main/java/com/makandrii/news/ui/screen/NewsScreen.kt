@@ -9,6 +9,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBackIosNew
 import androidx.compose.material.icons.outlined.Bookmark
 import androidx.compose.material.icons.outlined.BookmarkAdd
+import androidx.compose.material.icons.outlined.Share
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -38,14 +39,16 @@ fun NewsScreen(
     news: News,
     onBackButtonClicked: () -> Unit,
     onBookmarkButtonClicked: () -> Unit,
+    onShareButtonClicked: (News) -> Unit,
     modifier: Modifier = Modifier
 ) {
     Scaffold(
         topBar = {
             TopBar(
-                isBookmarked = news.isBookmarked,
+                news = news,
                 onBackButtonClicked = onBackButtonClicked,
-                onBookmarkButtonClicked = onBookmarkButtonClicked
+                onBookmarkButtonClicked = onBookmarkButtonClicked,
+                onShareButtonClicked = onShareButtonClicked
             )
         }
     ) {
@@ -100,9 +103,10 @@ fun NewsScreen(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TopBar(
-    isBookmarked: Boolean,
+    news: News,
     onBackButtonClicked: () -> Unit,
     onBookmarkButtonClicked: () -> Unit,
+    onShareButtonClicked: (News) -> Unit,
     modifier: Modifier = Modifier
 ) {
     TopAppBar(
@@ -118,11 +122,14 @@ fun TopBar(
                 )
                 Spacer(modifier = Modifier.weight(1f))
                 IconButton(onClick = onBookmarkButtonClicked) {
-                    if (isBookmarked) {
+                    if (news.isBookmarked) {
                         Icon(imageVector = Icons.Outlined.Bookmark, contentDescription = null)
                     } else {
                         Icon(imageVector = Icons.Outlined.BookmarkAdd, contentDescription = null)
                     }
+                }
+                IconButton(onClick = { onShareButtonClicked(news) }) {
+                    Icon(imageVector = Icons.Outlined.Share, contentDescription = null)
                 }
             }
         },
@@ -160,7 +167,8 @@ fun NewsScreenPreview() {
                 sourceUrl = "https://asiatimes.com"
             ),
             onBackButtonClicked = {},
-            onBookmarkButtonClicked = {}
+            onBookmarkButtonClicked = {},
+            onShareButtonClicked = {}
         )
     }
 }

@@ -5,4 +5,5 @@
     <string name="back">Назад</string>
     <string name="search">Пошук</string>
     <string name="bookmark">Закладки</string>
+    <string name="sharing_not_available">Неможливо поширити</string>
 </resources>
