@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">News</string>
+    <string name="loading_failed">Не вдалося завантажити</string>
+    <string name="my_news">Мої новини</string>
+    <string name="back">Назад</string>
+    <string name="search">Пошук</string>
+</resources>
