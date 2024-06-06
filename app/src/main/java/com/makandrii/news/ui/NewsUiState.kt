@@ -16,7 +16,8 @@ data class NewsUiState(
         Category(name = "other", uiDisplayName = "Інше")
     ),
     val searchQuery: String = "",
-    val searchedNews: List<News> = emptyList()
+    val searchedNews: List<News> = emptyList(),
+    val bookmarks: List<News> = emptyList()
 )
 
 data class Category(

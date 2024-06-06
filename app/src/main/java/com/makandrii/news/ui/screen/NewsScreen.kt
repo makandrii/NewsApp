@@ -7,6 +7,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBackIosNew
+import androidx.compose.material.icons.outlined.Bookmark
+import androidx.compose.material.icons.outlined.BookmarkAdd
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -35,12 +37,15 @@ import com.makandrii.news.ui.theme.NewsTheme
 fun NewsScreen(
     news: News,
     onBackButtonClicked: () -> Unit,
+    onBookmarkButtonClicked: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Scaffold(
         topBar = {
             TopBar(
-                onBackButtonClicked = onBackButtonClicked
+                isBookmarked = news.isBookmarked,
+                onBackButtonClicked = onBackButtonClicked,
+                onBookmarkButtonClicked = onBookmarkButtonClicked
             )
         }
     ) {
@@ -95,7 +100,9 @@ fun NewsScreen(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TopBar(
+    isBookmarked: Boolean,
     onBackButtonClicked: () -> Unit,
+    onBookmarkButtonClicked: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     TopAppBar(
@@ -109,6 +116,14 @@ fun TopBar(
                         fontWeight = FontWeight.Normal
                     )
                 )
+                Spacer(modifier = Modifier.weight(1f))
+                IconButton(onClick = onBookmarkButtonClicked) {
+                    if (isBookmarked) {
+                        Icon(imageVector = Icons.Outlined.Bookmark, contentDescription = null)
+                    } else {
+                        Icon(imageVector = Icons.Outlined.BookmarkAdd, contentDescription = null)
+                    }
+                }
             }
         },
         navigationIcon = {
@@ -144,7 +159,8 @@ fun NewsScreenPreview() {
                 pubDate = "14.05.2024, 08:30",
                 sourceUrl = "https://asiatimes.com"
             ),
-            onBackButtonClicked = {}
+            onBackButtonClicked = {},
+            onBookmarkButtonClicked = {}
         )
     }
 }

@@ -1,6 +1,7 @@
 package com.makandrii.news.ui.component
 
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.Bookmarks
 import androidx.compose.material.icons.outlined.Newspaper
 import androidx.compose.material.icons.outlined.Search
 import androidx.compose.material3.Icon
@@ -19,7 +20,7 @@ fun NewsBottomBar(
     onTabClicked: (tabIndex: Int) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    val tabs = listOf("Мої новини", "Пошук")
+    val tabs = listOf("Мої новини", "Пошук", "Закладки")
 
     TabRow(
         selectedTabIndex = tabIndex,
@@ -40,12 +41,11 @@ fun NewsBottomBar(
                 onClick = { onTabClicked(index) },
                 icon = {
                     when (index) {
-                        0 -> Icon(
-                            imageVector = Icons.Outlined.Newspaper,
-                            contentDescription = null
-                        )
+                        0 -> Icon(imageVector = Icons.Outlined.Newspaper, contentDescription = null)
 
                         1 -> Icon(imageVector = Icons.Outlined.Search, contentDescription = null)
+
+                        2 -> Icon(imageVector = Icons.Outlined.Bookmarks, contentDescription = null)
                     }
                 },
                 selectedContentColor = MaterialTheme.colorScheme.tertiary,

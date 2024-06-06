@@ -8,6 +8,6 @@ class MainApplication : Application() {
     lateinit var container: AppContainer
     override fun onCreate() {
         super.onCreate()
-        container = DefaultAppContainer(applicationContext.getString(R.string.API_KEY))
+        container = DefaultAppContainer(this, applicationContext.getString(R.string.API_KEY))
     }
 }

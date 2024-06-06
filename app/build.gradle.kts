@@ -2,6 +2,8 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
     alias(libs.plugins.jetbrains.kotlin.serialization)
+
+    id("com.google.devtools.ksp")
 }
 
 android {
@@ -79,4 +81,7 @@ dependencies {
     implementation(libs.navigation)
     implementation(libs.coroutines)
     implementation(libs.lottie)
+    implementation(libs.room.runtime)
+    implementation(libs.room.ktx)
+    ksp(libs.room.compiler)
 }

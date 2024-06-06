@@ -14,6 +14,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.makandrii.news.data.model.News
 import com.makandrii.news.ui.component.NewsBottomBar
+import com.makandrii.news.ui.screen.BookmarksScreen
 import com.makandrii.news.ui.screen.HomeScreen
 import com.makandrii.news.ui.screen.NewsScreen
 import com.makandrii.news.ui.screen.SearchScreen
@@ -68,6 +69,13 @@ fun NewsApp(
                             modifier = Modifier.padding(paddingValues)
                         )
                     }
+
+                    2 -> {
+                        BookmarksScreen(
+                            bookmarks = uiState.bookmarks,
+                            onCardClicked = onCardClicked(newsViewModel, navController)
+                        )
+                    }
                 }
 
             }
@@ -78,6 +86,13 @@ fun NewsApp(
                     news = uiState.selectedNews!!,
                     onBackButtonClicked = {
                         navController.navigateUp()
+                    },
+                    onBookmarkButtonClicked = {
+                        if (uiState.selectedNews!!.isBookmarked) {
+                            newsViewModel.removeBookmark(uiState.selectedNews!!)
+                        } else {
+                            newsViewModel.addBookmark(uiState.selectedNews!!)
+                        }
                     }
                 )
             } else {
